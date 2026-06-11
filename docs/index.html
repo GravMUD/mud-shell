@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MUD Shell — Developer docs</title>
+  <meta name="description" content="MIT headless frontend: SvelteKit + Konsta. @gravmud/shell and optional Village pack. Starters, Community API, gravfans demo.">
+  <meta property="og:title" content="MUD Shell — dev hub">
+  <meta property="og:url" content="https://mudshell.dev/">
+  <link rel="canonical" href="https://mudshell.dev/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Outfit:wght@500;600&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d1117;
+      --fg: #e6edf3;
+      --muted: #8b949e;
+      --mint: #3fb950;
+      --mint-dim: rgba(63, 185, 80, 0.15);
+      --cyan: #58a6ff;
+      --border: #30363d;
+      --card: #161b22;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Outfit', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 0% 0%, rgba(63, 185, 80, 0.12), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 30%, rgba(88, 166, 255, 0.1), transparent 50%);
+      z-index: -1;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1rem 1.5rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(13, 17, 23, 0.9);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      text-decoration: none;
+      color: var(--fg);
+      font-size: 1.1rem;
+    }
+    .logo span { color: var(--mint); }
+    .links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    a.btn {
+      color: var(--fg);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.45rem 0.9rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      background: var(--card);
+    }
+    a.btn:hover { border-color: var(--mint); }
+    a.btn.primary { background: var(--mint); color: #0d1117; border-color: var(--mint); }
+    main { max-width: 880px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+    h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.75rem, 5vw, 2.5rem);
+      margin: 0 0 0.5rem;
+      line-height: 1.15;
+    }
+    h1 span { color: var(--mint); }
+    .lead { color: var(--muted); font-size: 1.05rem; max-width: 36rem; margin: 0 0 1.5rem; }
+    .badges { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2rem; }
+    .badge {
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.3rem 0.65rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .badge.mint { border-color: rgba(63, 185, 80, 0.5); color: var(--mint); }
+    h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      margin: 2rem 0 0.75rem;
+      color: var(--mint);
+    }
+    pre {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 1rem 1.15rem;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0 0 1rem;
+    }
+    .pkg { color: var(--mint); }
+    .cmd { color: var(--cyan); }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 0.85rem;
+      margin: 1rem 0;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.65rem;
+      padding: 1rem 1.1rem;
+    }
+    .card h3 { margin: 0 0 0.35rem; font-size: 0.95rem; }
+    .card p { margin: 0; font-size: 0.85rem; color: var(--muted); }
+    .card a { color: var(--cyan); }
+    footer {
+      margin-top: 3rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+    footer a { color: var(--mint); }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <a class="logo" href="#">🐚 MUD <span>Shell</span> dev</a>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/GravMUD/mud-shell">GitHub</a>
+      <a class="btn" href="https://github.com/GravMUD/mud-shell/discussions">Discussions</a>
+      <a class="btn" href="https://getmudshell.com">Marketing</a>
+      <a class="btn" href="https://app.gravfans.live/feed">Live demo</a>
+    </div>
+  </nav>
+
+  <main>
+    <h1>The <span>wardrobe</span><br>for headless sites</h1>
+    <p class="lead"><strong>MIT</strong> · SvelteKit 5 · Konsta UI · optional Village pack · static cPanel deploy. Built adjacent to Grav 2 + Admin2.</p>
+    <div class="badges">
+      <span class="badge mint">v0.1 shipped</span>
+      <span class="badge">MIT</span>
+      <span class="badge">adapter-static</span>
+      <span class="badge">Community API</span>
+    </div>
+
+    <h2>Clone & run</h2>
+    <pre><span class="cmd">$</span> git clone https://github.com/GravMUD/mud-shell.git
+<span class="cmd">$</span> cd mud-shell/starters/gravmud-headless
+<span class="cmd">$</span> cp .env.example .env && npm install && npm run dev</pre>
+    <p style="color:var(--muted);font-size:0.9rem;margin-top:-0.5rem">Dev proxies <code>/members/api</code> → gravfans.live</p>
+
+    <h2>Repo layout</h2>
+    <pre><span class="pkg">starters/gravmud-headless/</span>   SvelteKit app (gravfans headless)
+<span class="pkg">  src/lib/shell/</span>           → future @gravmud/shell
+<span class="pkg">  src/lib/village/</span>         → future @gravmud/shell-village
+<span class="pkg">LICENSE</span>                    MIT</pre>
+
+    <h2>Community API (v0.1)</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>GET /members/api/feed</h3>
+        <p>Village activity feed. Used by <code>/feed</code> route.</p>
+      </div>
+      <div class="card">
+        <h3>GET /members/api/members</h3>
+        <p>Member directory + search.</p>
+      </div>
+      <div class="card">
+        <h3>GET /members/api/profile/{user}</h3>
+        <p>Public profile + graph stats.</p>
+      </div>
+      <div class="card">
+        <h3>GET /members/api/whoami</h3>
+        <p>Session check (cookie auth v0.2).</p>
+      </div>
+    </div>
+    <p style="font-size:0.88rem;color:var(--muted)">Backend today: <a href="https://github.com/GravMUD/grav-plugin-mambers">grav-plugin-mambers</a> on Grav 2. Host-agnostic HTTP — not hardcoded in shell core.</p>
+
+    <h2>Deploy static</h2>
+    <pre><span class="cmd">$</span> PUBLIC_GRAV_ORIGIN=https://gravfans.live npm run build
+<span class="cmd">#</span> upload build/ to docroot — .htaccess included for SPA routes</pre>
+
+    <h2>Links</h2>
+    <div class="grid">
+      <div class="card">
+        <h3><a href="https://app.gravfans.live/feed">app.gravfans.live</a></h3>
+        <p>Headless MUD Shell demo</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://gravfans.live/members/damo">gravfans classic</a></h3>
+        <p>THE HOUSE — Twig + Mambers</p>
+      </div>
+      <div class="card">
+        <h3><a href="https://getmudshell.com/#services">Hire the tailor</a></h3>
+        <p>Shell is free. Launch services on getmudshell.</p>
+      </div>
+    </div>
+
+    <footer>
+      <a href="https://github.com/GravMUD/mud-shell">GravMUD/mud-shell</a> ·
+      <a href="https://getmudshell.com">getmudshell.com</a> ·
+      FutureVision Labs · Team DC · Groundswell not fork
+    </footer>
+  </main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+	"name": "@gravmud/mud-shell-workspace",
+	"private": true,
+	"version": "0.1.0",
+	"description": "MUD Shell monorepo — shell, village pack, adapters, starters",
+	"workspaces": [
+		"starters/*"
+	],
+	"scripts": {
+		"dev": "npm run dev -w gravmud-headless",
+		"build": "npm run build -w gravmud-headless"
+	}
+}

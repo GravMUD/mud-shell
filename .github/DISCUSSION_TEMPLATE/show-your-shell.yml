@@ -1,0 +1,20 @@
+title: Show your shell
+labels: []
+body:
+  - type: markdown
+    value: |
+      Share your MUD Shell deploy — headless fan site, corporate shell, gravfans-style village. Screenshots welcome. Team DC loves a good wardrobe. >8)
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot or live URL
+      description: Drag an image in or paste https://app.yoursite.com
+    validations:
+      required: true
+  - type: textarea
+    id: stack
+    attributes:
+      label: Your stack
+      description: CMS, adapter, hosting (cPanel, DA, Vercel), Village pack yes/no
+    validations:
+      required: false

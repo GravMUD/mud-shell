@@ -1,0 +1,19 @@
+title: Q&A
+labels: []
+body:
+  - type: markdown
+    value: |
+      Questions about headless GravMUD, Mambers `/members/api`, static deploy, or Konsta setup. Search existing discussions first if you can.
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context (optional)
+      description: Grav version, host, error message, browser
+    validations:
+      required: false

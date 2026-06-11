@@ -1,0 +1,24 @@
+title: Idea
+labels: []
+body:
+  - type: markdown
+    value: |
+      Adapter requests, Village pack features, Konsta chrome ideas. Core shell stays CMS-agnostic — village stays HTTP-only.
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - "@gravmud/shell (core)"
+        - "@gravmud/shell-village"
+        - "@gravmud/adapter-grav"
+        - Other adapter (Directus, WP, …)
+        - Docs / starter
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like?
+    validations:
+      required: true

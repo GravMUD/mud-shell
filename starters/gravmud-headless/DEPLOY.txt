@@ -1,0 +1,26 @@
+MUD Shell — gravmud-headless deploy
+====================================
+
+Target: app.gravfans.live (cPanel subdomain on gravfans account)
+
+Build locally (recommended):
+  cd GRAV-MUD
+  .\scripts\build-gravfans-app.ps1
+  → deploy/gravfans-app.zip
+
+Or manual:
+  cd packages/mud-shell/starters/gravmud-headless
+  set PUBLIC_GRAV_ORIGIN=https://gravfans.live
+  npm ci && npm run build
+
+Upload zip contents (or build/) to the subdomain docroot.
+
+cPanel notes:
+  - Create subdomain app.gravfans.live → e.g. public_html/app
+  - Ensure .htaccess serves index.html for client routes (SvelteKit ships this)
+
+Env at build time:
+  PUBLIC_GRAV_ORIGIN=https://gravfans.live
+
+Cookie auth (v0.2):
+  Same parent domain (.gravfans.live) needed for session cookies from shell → API.

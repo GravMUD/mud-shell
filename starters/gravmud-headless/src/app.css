@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap');
+@import 'tailwindcss';
+@import 'konsta/svelte/theme.css';
+
+:root {
+	--mud-accent: #00c389;
+	--mud-accent-dim: #00996b;
+	--mud-surface: #0f1419;
+	--mud-card: #1a222d;
+}
+
+html,
+body {
+	height: 100%;
+	background: var(--mud-surface);
+}
+
+.mud-accent {
+	color: var(--mud-accent);
+}
+
+.mud-feed-body b,
+.mud-feed-body strong {
+	font-weight: 600;
+}
+
+.mud-feed-body i,
+.mud-feed-body em {
+	font-style: italic;
+}
